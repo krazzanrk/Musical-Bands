@@ -1,0 +1,101 @@
+{% extends '_base.html' %}
+{% block content %}
+
+
+    <!--Start album banner-->
+    <div class="card bg-dark text-white container-fluid">
+        <img class="card-img "
+             src="{{ album_detail.musical_band.cover_image.url }}" height="300px">
+    </div>
+    <!--End album banner-->
+
+    <section>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-7">
+                    <div class="card">
+                        <div class="card-body">
+                            <img class="card-img-top"
+                                 src="{{ album_detail.image.url }}" height="300px">
+                            <h1 class="card-title mt-4">{{ album_detail.name }}</h1>
+
+                            <p class="card-text text-justify">{{ album_detail.description | safe}}</p>
+                            <h5>Artists</h5>
+                            <ul>
+                                {% for member in members %}
+                                    <li>{{ member.first_name }} {{ member.middle_name }} {{ member.last_name }}</li>
+
+
+                                {% endfor %}
+                            </ul>
+                            <h5>Genres :
+                            <small>{% for genre in genres %}
+                                {{ genre.title }},
+                            {% endfor %}
+</small></h5>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-5">
+                    <div class="row ">
+                        <div class="card w-100 mr-3">
+                            <div class="card-header bg-dark text-white">
+                                songs
+                            </div>
+                            <div class="card-body">
+                                <ul class="list-group list-group-flush">
+                                    {% for song in songs %}
+                                        <li class="list-group-item">
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <div class="row"><h5><small><b><a href="#">{{ song.title }}</a></b></small>
+                                                    </h5></div>
+                                                    <div class="row"><p>Genre : <small>
+                                                        {% for i in song.genre.all %}{{ i }}{% endfor %}</small></p>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </li>
+                                    {% endfor %}
+
+
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mt-4">
+                        <div class="card mr-3">
+                            <div class="card-header bg-dark text-white">
+                                More Albums
+                            </div>
+                            <div class="card-body">
+                                <ul class="list-group list-group-flush">
+                                    {% for alu in albums %}
+                                        <li class="list-group-item">
+                                            <div class="row">
+                                                <div class="col-8">
+                                                    <div class="row"><h5>{{ alu.name }}</h5></div>
+                                                    <div class="row"><h6><small><b>Released
+                                                        : </b></small><small>{{ alu.released }}</small></h6>
+                                                    </div>
+                                                </div>
+                                                <div class="col-3">
+                                                    <img class="card-img-top"
+                                                         src="{{ alu.image.url }}">
+                                                </div>
+                                            </div>
+                                        </li>
+                                    {% endfor %}
+
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
