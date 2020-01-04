@@ -1,0 +1,52 @@
+{% extends '_base.html' %}
+{% block content %}
+    <section class="pt-3">
+        <div class="container">
+            <div class="container-fluid bg-dark text-warning">
+                <div class="row p-lg-3">
+                    <div class="col-lg-6 col-md-6 col-sm-6"><h2 class="pl-lg-5">ALBUMS</h2></div>
+                    <div class="col-lg-6 col-md-6 col-sm-6 ">
+                        <form class="form-inline my-2 my-lg-0 float-right pr-lg-3 p-1" method="get"
+                              action="{% url 'bands:search' %}">
+                            <input class="form-control mr-sm-2" name="title" type="search" placeholder="Search"
+                                   aria-label="Search">
+                            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search by Album</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mt-2">
+                {% for album in albums %}
+                    <div class="col-xs-11 col-sm-5 col-md-3 mb-4">
+                        <div class="card">
+                            <img class="card-img-top"
+                                 src="{{ album.image.url }}" height="180px">
+                            <div class="card-body">
+                                <h5 class="card-title"><a href="{% url 'bands:albums_detail' album.slug %}">{{ album.name }}</a></h5>
+                                <p class="card-text"><small>by {{ album.musical_band.name }}</small></p>
+                                <p class="card-text"><small class="text-muted">Released : {{ album.released }}</small>
+                                </p>
+                            </div>
+                        </div>
+
+                    </div>
+
+                {% endfor %}
+
+
+            </div>
+
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class=" offset-lg-5">
+                    {% include 'partials/pagination.html' %}
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}
+
+

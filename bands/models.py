@@ -4,66 +4,75 @@ from django.db import models
 
 # Create your models here.
 
-class MusicalBand(models.Model):
-    band_name = models.CharField(max_length=50)
-    musical_band_established_date = models.DateField()
-    location = models.CharField(max_length=25)
-    description = models.TextField()
-    logo = models.ImageField()
-    cover_image = models.ImageField()
-    created_by = models.ForeignKey(User, on_delete=models.DO_NOTHING,related_name='band_created_by')
-    created_date = models.DateTimeField(auto_now=True)
-    modified_by = models.ForeignKey(User, on_delete=models.DO_NOTHING, blank=True ,related_name='band_modified_by',null=True)
-    modified_date = models.DateTimeField(blank=True,null=True)
-
-    def __str__(self):
-        return self.band_name
-
-    class Meta:
-        verbose_name_plural = "Music Bands"
-
-
 class Role(models.Model):
     title = models.CharField(max_length=50)
 
     def __str__(self):
         return self.title
 
+
+class MusicalBand(models.Model):
+    name = models.CharField(max_length=50)
+    established_date = models.DateField()
+    location = models.CharField(max_length=25)
+    description = models.TextField()
+    logo = models.ImageField()
+    cover_image = models.ImageField()
+    created_by = models.ForeignKey(User, on_delete=models.DO_NOTHING)
+    created_date = models.DateTimeField(auto_now=True)
+    modified_date = models.DateTimeField(blank=True, null=True)
+    slug = models.SlugField()
+
+    def __str__(self):
+        return self.name
+
     class Meta:
-        verbose_name_plural = "Roles"
+        verbose_name_plural = "Musical Bands"
+
+
+class Member_status(models.Model):
+    band_date_joined = models.DateField()
+    band = models.ForeignKey(MusicalBand, on_delete=models.DO_NOTHING)
+    status = models.BooleanField()
+
+    def __str__(self):
+        return self.band.name
 
 
 class BandMember(models.Model):
     first_name = models.CharField(max_length=50)
     middle_name = models.CharField(max_length=50, blank=True)
     last_name = models.CharField(max_length=50)
-    dob = models.DateField(blank=True,null=True)
+    dob = models.DateField(blank=True, null=True)
+    status = models.ForeignKey(Member_status, on_delete=models.DO_NOTHING)
     profile_pic = models.ImageField()
     description = models.TextField()
     role = models.ManyToManyField(Role)
-    date_joined = models.DateField()
-    status = models.BooleanField()
 
     def __str__(self):
         return self.first_name
 
     class Meta:
-        verbose_name_plural = "Band Members"
+        verbose_name_plural = "Band members"
 
 
 class Album(models.Model):
-    album_name = models.CharField(max_length=50)
-    album_released=models.DateTimeField()
-    music_band = models.ForeignKey(MusicalBand, on_delete=models.DO_NOTHING, related_name='musical_band')
-    album_published_year = models.DateField()
+    name = models.CharField(max_length=50)
+    released = models.DateTimeField()
+    musical_band = models.ForeignKey(MusicalBand, on_delete=models.DO_NOTHING)
+    description = models.TextField(blank=True, null=True)
     image = models.ImageField()
-    album_created_by = models.ForeignKey(User, on_delete=models.DO_NOTHING,related_name='album_created')
-    album_created_date = models.DateTimeField(auto_now=True)
-    added_album_modified_by = models.ForeignKey(User, on_delete=models.DO_NOTHING, blank=True,null=True)
-    added_album_modified_date = models.DateTimeField(blank=True,null=True)
+    created_by = models.ForeignKey(User, on_delete=models.DO_NOTHING)
+    created_date = models.DateTimeField(auto_now=True)
+    # modified_by = models.ForeignKey(User, blank=True,on_delete=models.DO_NOTHING)
+    modified_date = models.DateTimeField(blank=True, null=True)
+    slug = models.SlugField()
 
     def __str__(self):
-        return self.album_name
+        return self.name
+
+    class Meta:
+        verbose_name_plural = 'Album names'
 
 
 class Genre(models.Model):
@@ -74,14 +83,14 @@ class Genre(models.Model):
 
 
 class Song(models.Model):
-    song_title = models.CharField(max_length=50)
+    title = models.CharField(max_length=50)
     genre = models.ManyToManyField(Genre)
-    album = models.ForeignKey(Album, on_delete=models.DO_NOTHING, related_name='band_album')
-    artist = models.ManyToManyField(BandMember)
-    song_added_by = models.ForeignKey(User, on_delete=models.DO_NOTHING,related_name='song_added')
-    song_added_date = models.DateTimeField(auto_now=True)
-    added_song_modified_by = models.ForeignKey(User, on_delete=models.DO_NOTHING, blank=True,null=True)
-    added_song_modified_date = models.DateTimeField(blank=True,null=True)
+    album = models.ForeignKey(Album, on_delete=models.DO_NOTHING)
+    member_name = models.ManyToManyField(BandMember)
+    added_by = models.ForeignKey(User, on_delete=models.DO_NOTHING)
+    added_date = models.DateField(auto_now=True)
+    # modified_by = models.ForeignKey(User, on_delete=models.DO_NOTHING)
+    modified_date = models.DateField(blank=True, null=True)
 
     def __str__(self):
-        return self.song_title
+        return self.title

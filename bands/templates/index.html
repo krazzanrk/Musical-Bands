@@ -1,0 +1,183 @@
+{% extends '_base.html' %}
+{% block content %}
+
+
+
+    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+        <ol class="carousel-indicators">
+            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+        </ol>
+
+        <div class="carousel-inner">
+            {% for popular in popular_band %}
+
+                {% if forloop.first %}
+
+
+                    <div class="carousel-item active">
+
+                {% else %}
+                    <div class="carousel-item ">
+                {% endif %}
+
+
+            <img class="d-block w-100" src="{{ popular.cover_image.url }}" alt="First slide">
+
+            </div>
+
+            {% endfor %}
+
+            </div>
+            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+
+
+        <!---start latest Album--->
+        <div class="container">
+
+            <div class="row mt-lg-3 mt-md-3 mt-sm-2 bg-light">
+                <div class="row pl-5">
+                    <div>
+                        <h2>Nepali Bands</h2>
+                        <hr class="bg-primary">
+
+                    </div>
+                </div>
+
+                <div class="card-deck">
+                    {% for nb in nepali_bands %}
+                        <div class="card">
+                            <img class="card-img-top"
+                                 src="{{ nb.logo.url }}"
+                                 alt="Card image cap" height="200px">
+                            <div class="card-body">
+                                <h5 class="card-title"></h5>
+                                <p class="card-text"> <a href="{% url 'bands:bands_detail' nb.slug %}"> {{ nb.name }}</a></p>
+                                <p class="card-text"><small class="text-muted"> since {{ nb.established_date }}</small>
+                                </p>
+                                <p class="card-text"><small class="text-muted"> from {{ nb.location }}</small></p>
+                            </div>
+
+                        </div>
+                    {% endfor %}
+                    <div class="card">
+
+                        <div class="card-body">
+                            <h5 class="card-title"></h5>
+
+                            <p class="card-text"><small class="text-muted"><a href="{% url 'bands:band_list' %}"><img
+                                    class="card-img-top mt-5 pt-5"
+                                    src="data:image/png;base64,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"
+                                    alt="Card image cap"></a></small></p>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+
+            <div class="row mt-lg-3 mt-md-3 mt-sm-2 bg-light">
+                <div class="row pl-5">
+                    <div>
+                        <h2>Latest Albums</h2>
+                        <hr class="bg-primary">
+
+                    </div>
+                </div>
+
+                <div class="card-deck">
+                    {% for album in latest_albums %}
+                        <div class="card">
+                            <img class="card-img-top"
+                                 src="{{ album.image.url }}"
+                                 alt="Card image cap" height="200px">
+                            <div class="card-body">
+                                <h5 class="card-title"><a
+                                        href="{% url 'bands:albums_detail' album.slug %}">{{ album.name }}</a></h5>
+                                <p class="card-text"><a
+                                >{{ album.musical_band.name }}</a>
+                                </p>
+                                <p class="card-text"><small class="text-muted">{{ album.released.year }}</small></p>
+                            </div>
+
+                        </div>
+                    {% endfor %}
+                    <div class="card">
+
+                        <div class="card-body">
+                            <h5 class="card-title"></h5>
+
+                            <p class="card-text"><small class="text-muted"><a href="{% url 'bands:album_list' %}"><img
+                                    class="card-img-top mt-5 pt-5"
+                                    src="data:image/png;base64,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"
+                                    alt="Card image cap"></a></small></p>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+
+
+            <!---end latest Album--->
+
+            <!---start Trending song--->
+
+            <div class="row mt-lg-3 mt-md-3 mt-sm-2  bg-light">
+                <div class="row pl-5">
+                    <div>
+                        <h2>Trending Songs</h2>
+                        <hr class="bg-primary">
+
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="row mb-lg-3">
+                {% for song in trending_songs %}
+
+                    <div class="col-6 ">
+                        <div class="card w-80 mt-lg-3">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-8">
+                                        <h5 class="card-title">{{ song.title }}</h5>
+                                        <p class="card-text">Album : <small>{{ song.album }}</small>&nbsp&nbsp|&nbsp&nbspBand
+                                            : <small>{{ song.album.musical_band.name }}</small></p>
+                                    </div>
+                                    <div class="col-4"><img src="{{ song.album.image.url }}" height="80px"
+                                                            width="120px">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+                <div class="col-6 ">
+                    <div class="card w-80 mt-lg-3">
+                        <div class="card-body">
+                            <h5 class="card-title"></h5>
+
+                            <h1 class="card-text text-center">View More</h1>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+
+
+        <!---end trending song--->
+
+{% endblock %}
