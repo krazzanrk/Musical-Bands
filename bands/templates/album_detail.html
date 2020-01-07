@@ -5,7 +5,7 @@
     <!--Start album banner-->
     <div class="card bg-dark text-white container-fluid">
         <img class="card-img "
-             src="{{ album_detail.musical_band.cover_image.url }}" height="300px">
+             src="{{ album.musical_band.cover_image.url }}" height="300px">
     </div>
     <!--End album banner-->
 
@@ -16,10 +16,10 @@
                     <div class="card">
                         <div class="card-body">
                             <img class="card-img-top"
-                                 src="{{ album_detail.image.url }}" height="300px">
+                                 src="{{ album.image.url }}" height="300px">
                             <h1 class="card-title mt-4">{{ album_detail.name }}</h1>
 
-                            <p class="card-text text-justify">{{ album_detail.description | safe}}</p>
+                            <p class="card-text text-justify">{{ album.description | safe }}</p>
                             <h5>Artists</h5>
                             <ul>
                                 {% for member in members %}
@@ -29,10 +29,12 @@
                                 {% endfor %}
                             </ul>
                             <h5>Genres :
-                            <small>{% for genre in genres %}
-                                {{ genre.title }},
-                            {% endfor %}
-</small></h5>
+                                <small>{% for genre in genres %}
+                                    {{ genre.title }},
+                                {% endfor %}
+
+
+                                </small></h5>
                         </div>
                     </div>
                 </div>

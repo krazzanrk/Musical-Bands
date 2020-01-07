@@ -13,6 +13,7 @@
 
     <link rel="stylesheet" href="{% static 'css/banner.css' %}">
     <link rel="stylesheet" href="{% static 'css/band-detail.css' %}">
+    <link rel="stylesheet" href="{% static 'css/footer.css' %}">
 
     <script src="{% static 'js/band-detail.js' %}"></script>
 
@@ -25,12 +26,12 @@
 <div class="container-fluid bg-dark text-warning">
     <div class="row p-lg-3">
         <div class="col-lg-6 col-md-6 col-sm-6"><h2 class="pl-lg-5">Nepali Musical Band</h2></div>
-        {#        <div class="col-lg-6 col-md-6 col-sm-6 ">#}
-        {#            <form class="form-inline my-2 my-lg-0 float-right pr-lg-3 p-1">#}
-        {#                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">#}
-        {#                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>#}
-        {#            </form>#}
-        {#        </div>#}
+{#                <div class="col-lg-6 col-md-6 col-sm-6 ">#}
+{#                    <form class="form-inline my-2 my-lg-0 float-right pr-lg-3 p-1">#}
+{#                        <input class="form-control mr-sm-2" title='topic' type="search" placeholder="Search" aria-label="Search">#}
+{#                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>#}
+{#                    </form>#}
+{#                </div>#}
 
     </div>
     <hr class="bg-light m-0 ">
@@ -63,12 +64,22 @@
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav mr-auto">
+                        {% if request.user.is_authenticated %}
+
+                            <li class="nav-item active">
+                            <a class="nav-link text-white" href="{% url 'account_logout' %}">LOGOUT<span class="sr-only">(current)</span></a>
+                        </li>
+                             <li class="nav-item active">
+                            <a class="nav-link text-white">{{request.user}}<span class="sr-only">(current)</span></a>
+                        </li>
+                            {% else %}
                         <li class="nav-item active">
-                            <a class="nav-link text-white" href="#">LOGIN <span class="sr-only">(current)</span></a>
+                            <a class="nav-link text-white" href="{% url 'account_login' %}">LOGIN <span class="sr-only">(current)</span></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-white" href="#">REGISTER</a>
+                            <a class="nav-link text-white" href="{% url 'account_signup' %}">REGISTER</a>
                         </li>
+                        {% endif %}
                     </ul>
                 </div>
             </nav>
@@ -85,15 +96,14 @@
 
 </body>
 
-<!-- Footer -->
-<footer class="page-footer font-small blue bg-dark">
 
-    <!-- Copyright -->
-    <div class="footer-copyright text-center py-3 text-white">© 2020 Copyright:
-        <a href="https://mdbootstrap.com/education/bootstrap/"> MDBootstrap.com</a>
+<footer class="bg-dark text-white mt-4">
+    <div class="container-fluid py-3">
+        <div class="footer-copyright text-center py-3 text-white">© 2020 Copyright:
+            <a href="https://mdbootstrap.com/education/bootstrap/"> MDBootstrap.com</a>
+        </div>
+
     </div>
-    <!-- Copyright -->
-
 </footer>
 <!-- Footer -->
 

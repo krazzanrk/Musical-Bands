@@ -1,8 +1,7 @@
 from django.shortcuts import render
 from .models import *
-
-# Create your views here.
 from django.views.generic import *
+
 
 
 class IndexView(TemplateView):
@@ -14,10 +13,11 @@ class IndexView(TemplateView):
         context['popular_band'] = MusicalBand.objects.all()
         context['nepali_bands'] = MusicalBand.objects.order_by('established_date')[:3]
         context['latest_albums'] = Album.objects.order_by('-released')[:3]
-        context['trending_songs'] = Song.objects.order_by('-added_date')[:3]
+        context['trending_songs'] = Song.objects.order_by('title')[:3]
         # context['musical_band'] = MusicalBand.objects.all()
 
         return context
+
 
 class AlbumListView(ListView):
     template_name = 'album_list.html'
@@ -33,30 +33,25 @@ class BandListView(ListView):
     paginate_by = 2
 
 
-class AlbumDetailView(TemplateView):
+class AlbumDetailView(DetailView):
     template_name = 'album_detail.html'
     model = Album
 
     def get_context_data(self, **kwargs):
-
         context = super().get_context_data(**kwargs)
-        slug = self.kwargs['slug']
-
-        album = Album.objects.get(slug=slug)
-        context['album_detail'] = album
-        context['albums'] = Album.objects.filter(musical_band=album.musical_band.id)[:3]
-        songs = Song.objects.filter(album=album.id)
-        context['songs'] = songs
-        member_name = []
-        alb = BandMember.objects.filter(song__album_id=album.id)
-        for i in alb:
-            member_name.append(i)
-        context['members'] = set(member_name)
+        context['albums'] = Album.objects.filter(musical_band_id=self.object.musical_band_id)[:3]
+        context['songs'] = Song.objects.filter(album_id=self.object.id)[:3]
         genre = []
-        alb = Genre.objects.filter(song__album_id=album.id)
+        alb = Genre.objects.filter(song__album_id=self.object.id)
         for i in alb:
             genre.append(i)
         context['genres'] = set(genre)
+
+        member_name = []
+        alb = BandMember.objects.filter(song__album_id=self.object.id)
+        for i in alb:
+            member_name.append(i)
+        context['members'] = set(member_name)
         return context
 
 
@@ -66,18 +61,9 @@ class BandDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        slug = self.kwargs['slug']
-        music_band = MusicalBand.objects.get(slug=slug)
-        context['music_band_detail'] = music_band
-        bandmember = BandMember.objects.filter(status__band_id=music_band)
-        context['bandmembers'] = bandmember
-        context['latest_released']=Album.objects.filter(musical_band=music_band).order_by('-released')[:5]
-
-
+        context['bandmembers'] = BandMember.objects.filter(status__band_id=self.object.id)
+        context['latest_released'] = Album.objects.filter(musical_band=self.object.id).order_by('-released')[:5]
         return context
-
-
-
 
 
 class SearchResultView(ListView):
@@ -99,3 +85,8 @@ class SearchResultView(ListView):
             return render(request, 'search_result_by_album.html', context={
                 'search_result': search_result
             })
+
+
+
+
+

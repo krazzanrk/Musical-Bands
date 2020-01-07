@@ -6,9 +6,8 @@ from .models import *
 admin.site.register(MusicalBand)
 admin.site.register(Role)
 admin.site.register(BandMember)
-admin.site.register(Member_status)
+admin.site.register(MemberStatus)
 admin.site.register(Genre)
-# admin.site.register(Song)
 
 class SongTabularInline(admin.TabularInline):
     model = Song
@@ -16,15 +15,5 @@ class SongTabularInline(admin.TabularInline):
 class AlbumAdmin(admin.ModelAdmin):
     inlines = [SongTabularInline]
 
-
-# class MemberStatusTabularInline(admin.TabularInline):
-#     model = Member_status
-#
-# class BandMemberAdmin(admin.ModelAdmin):
-#     inlines = [MemberStatusTabularInline]
-#
-# admin.site.register(BandMember,BandMemberAdmin)
-
-
-
 admin.site.register(Album,AlbumAdmin)
+

@@ -30,8 +30,8 @@
                                     <div class="row">
                                         <div class="col-8">
                                             <div class="row"><p> Estd :
-                                                <small>{{ music_band_detail.established_date.year }}</small></p></div>
-                                            <div class="row"><p> Origin :<small>{{ music_band_detail.location }}</small>
+                                                <small>{{ musicalband.established_date.year }}</small></p></div>
+                                            <div class="row"><p> Origin :<small>{{ musicalband.location }}</small>
                                             </p></div>
                                             <div class="row"><p> Members:</p>
                                                 <ul>
@@ -98,12 +98,8 @@
                                                     <h4 class="card-title">{{ member.first_name }} {{ member.middle_name }} {{ member.last_name }}</h4>
 
                                                     <p class="card-text">Role:
-                                                        {% for k,v in  dicts.items %}
-
-                                                            {% if member == z %}
-                                                                {{ v }}
-
-                                                            {% endif %}
+                                                        {% for m_role in member.role.all %}
+                                                            {{ m_role }},
                                                         {% endfor %}
                                                     </p>
                                                     <ul class="list-inline">
