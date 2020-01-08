@@ -4,17 +4,18 @@
         <div class="container">
             <div class="container-fluid bg-dark text-warning">
                 <div class="row p-lg-3">
-                    <div class="col-lg-6 col-md-6 col-sm-6"><h2 class="pl-lg-5">ALBUMS</h2></div>
+                    <div class="col-lg-6 col-md-6 col-sm-6"><h2 class="pl-lg-5">Band you have searched</h2></div>
                     <div class="col-lg-6 col-md-6 col-sm-6 ">
                         <form class="form-inline my-2 my-lg-0 float-right pr-lg-3 p-1" method="get" action="{% url 'bands:search' %}">
-                            <input class="form-control mr-sm-2" name="title" type="search" placeholder="Search" aria-label="Search">
-                            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search by Album</button>
+                            <input class="form-control mr-sm-2" name="band" type="search" placeholder="Search" aria-label="Search">
+                            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search by band</button>
                         </form>
                     </div>
                 </div>
             </div>
 
             <div class="row mt-2">
+            {% if search_result.exists %}
                 {% for band in search_result %}
                     <div class="col-xs-11 col-sm-5 col-md-3 mb-4">
                         <div class="card">
@@ -31,6 +32,19 @@
                     </div>
 
                 {% endfor %}
+
+            {% else %}
+                                    <div class="col-xs-11 col-sm-5 col-md-3 mb-4">
+                        <div class="card">
+                            <div class="card-body">
+                                               <h1>Band not found</h1>
+
+                            </div>
+                        </div>
+
+                    </div>
+
+            {% endif %}
 
 
             </div>

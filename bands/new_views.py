@@ -33,27 +33,40 @@ class BandListView(ListView):
     paginate_by = 2
 
 
+# class AlbumDetailView(DetailView):
+#     template_name = 'album_detail.html'
+#     model = Album
+#
+#     def get_context_data(self, **kwargs):
+#         context = super().get_context_data(**kwargs)
+#         context['albums'] = Album.objects.filter(musical_band_id=self.object.musical_band_id)[:3]
+#         context['songs'] = Song.objects.filter(album_id=self.object.id)[:3]
+#         genre = []
+#         alb = Genre.objects.filter(song__album_id=self.object.id)
+#         for i in alb:
+#             genre.append(i)
+#         context['genres'] = set(genre)
+#
+#         member_name = []
+#         alb = BandMember.objects.filter(song__album_id=self.object.id)
+#         for i in alb:
+#             member_name.append(i)
+#         context['members'] = set(member_name)
+#         return context
+
+
 class AlbumDetailView(DetailView):
     template_name = 'album_detail.html'
     model = Album
+
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['albums'] = Album.objects.filter(musical_band_id=self.object.musical_band_id)[:3]
         context['songs'] = Song.objects.filter(album_id=self.object.id)[:3]
-        genre = []
-        alb = Genre.objects.filter(song__album_id=self.object.id)
-        for i in alb:
-            genre.append(i)
-        context['genres'] = set(genre)
-
-        member_name = []
-        alb = BandMember.objects.filter(song__album_id=self.object.id)
-        for i in alb:
-            member_name.append(i)
-        context['members'] = set(member_name)
+        context['genres']=Genre.objects.filter(song__album_id=self.object.id).distinct()
+        context['members'] = BandMember.objects.filter(song__album_id=self.object.id).distinct()
         return context
-
 
 class BandDetailView(DetailView):
     template_name = 'band_detail.html'
@@ -67,7 +80,7 @@ class BandDetailView(DetailView):
 
 
 class SearchResultView(ListView):
-    template_name = 'search_result_by_musical_band.html'
+    # template_name = 'search_result_by_musical_band.html'
     model = MusicalBand
 
     def get(self, request, *args, **kwargs):

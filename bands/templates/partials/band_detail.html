@@ -1,0 +1,192 @@
+{% extends '_base.html' %}
+{% block content %}
+
+
+
+    <div class="card bg-dark text-white container-fluid">
+        <img class="card-img "
+             src="{{ musicalband.cover_image.url }}" height="300px">
+    </div>
+
+
+    <div class="card-body ">
+        <div class="jumbotron pt-lg-3">
+            <h3 class="card-title">About Band</h3>
+
+            <hr>
+            <div class="row">
+                <div class="col-8 text-justify">
+                    <p> {{ musicalband.description | linebreaks }}</p>
+                </div>
+                <div class="col-4">
+                    <div class="card mr-3">
+                        <div class="card-header bg-dark text-white">
+                            More Albums
+                        </div>
+                        <div class="card-body">
+                            <ul class="list-group list-group-flush">
+
+                                <li class="list-group-item">
+                                    <div class="row">
+                                        <div class="col-8">
+                                            <div class="row"><p> Estd :
+                                                <small>{{ musicalband.established_date.year }}</small></p></div>
+                                            <div class="row"><p> Origin :<small>{{ musicalband.location }}</small>
+                                            </p></div>
+                                            <div class="row"><p> Members:</p>
+                                                <ul>
+
+                                                    {% for bm in bandmembers %}
+                                                        <li>
+                                                            <small>{{ bm.first_name }} {{ bm.middle_name }} {{ bm.last_name }}</small>
+                                                        </li>
+                                                    {% endfor %}
+                                                </ul>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-3">
+                                            <img class="card-img-top"
+                                                 src="{{ alu.image.url }}">
+                                        </div>
+                                    </div>
+                                </li>
+
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="card-body ">
+        <div class="jumbotron pt-lg-3 mt-0">
+
+
+            <section id="team" class="pb-5">
+                <div class="container">
+                    <h5 class="section-title h1">Band Members</h5>
+                    <div class="row">
+                        <!-- Team member -->
+                        {% for member in bandmembers %}
+
+                            <div class="col-xs-12 col-sm-6 col-md-4">
+                                <div class="image-flip" ontouchstart="this.classList.toggle('hover');">
+                                    <div class="mainflip">
+                                        <div class="frontside">
+                                            <div class="card">
+                                                <div class="card-body text-center">
+                                                    <p><img class=" img-fluid"
+                                                            src="{{ member.profile_pic.url }}"
+                                                            alt="card image"></p>
+                                                    <h4 class="card-title">{{ member.first_name }} {{ member.middle_name }} {{ member.last_name }}</h4>
+                                                    <p class="card-text">Status: {% if member.status.status == True %}
+                                                        <span style="color: #1e7e34">ACTIVE</span>{% else %}
+                                                        <span style="color: red">INACTIVE</span>{% endif %}</p>
+                                                    <a href="#" class="btn btn-primary btn-sm"><i
+                                                            class="fa fa-plus"></i></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="backside">
+                                            <div class="card">
+                                                <div class="card-body text-center mt-4">
+                                                    <h4 class="card-title">{{ member.first_name }} {{ member.middle_name }} {{ member.last_name }}</h4>
+
+                                                    <p class="card-text">Role:
+                                                        {% for m_role in member.role.all %}
+                                                            {{ m_role }},
+                                                        {% endfor %}
+                                                    </p>
+                                                    <ul class="list-inline">
+                                                        <li class="list-inline-item">
+                                                            <a class="social-icon text-xs-center" target="_blank"
+                                                               href="#">
+                                                                <i class="fa fa-facebook"></i>
+                                                            </a>
+                                                        </li>
+                                                        <li class="list-inline-item">
+                                                            <a class="social-icon text-xs-center" target="_blank"
+                                                               href="#">
+                                                                <i class="fa fa-twitter"></i>
+                                                            </a>
+                                                        </li>
+                                                        <li class="list-inline-item">
+                                                            <a class="social-icon text-xs-center" target="_blank"
+                                                               href="#">
+                                                                <i class="fa fa-skype"></i>
+                                                            </a>
+                                                        </li>
+                                                        <li class="list-inline-item">
+                                                            <a class="social-icon text-xs-center" target="_blank"
+                                                               href="#">
+                                                                <i class="fa fa-google"></i>
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                        <!-- ./Team member -->
+                        <!-- Team member -->
+
+                        <!-- ./Team member -->
+
+                    </div>
+                </div>
+            </section>
+
+
+        </div>
+    </div>
+
+
+    <div class="card-body ">
+        <div class="jumbotron pt-lg-3 mt-0">
+
+
+            <div class="container">
+
+                {#                <div class="row mt-lg-3 mt-md-3 mt-sm-2 bg-dark text-white">#}
+                <div class="row ">
+                    <div>
+                        <h2>Released Albums</h2>
+                        <hr class="bg-primary">
+
+                    </div>
+                </div>
+
+                <div class="row mt-2">
+                    {% for album in latest_released %}
+                        <div class="col-xs-11 col-sm-5 col-md-3 mb-4">
+                            <div class="card">
+                                <img class="card-img-top"
+                                     src="{{ album.image.url }}" height="180px">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ album.name }}</h5>
+                                    <p class="card-text"><small>by {{ album.musical_band.name }}</small></p>
+                                    <p class="card-text"><small class="text-muted">Released
+                                        : {{ album.released }}</small>
+                                    </p>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    {% endfor %}
+                </div>
+                <!---end latest Album--->
+            </div>
+        </div>
+
+    </div>
+
+{% endblock %}
