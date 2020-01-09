@@ -3,7 +3,6 @@ from .models import *
 from django.views.generic import *
 
 
-
 class IndexView(TemplateView):
     template_name = 'index.html'
 
@@ -59,14 +58,15 @@ class AlbumDetailView(DetailView):
     template_name = 'album_detail.html'
     model = Album
 
-
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['albums'] = Album.objects.filter(musical_band_id=self.object.musical_band_id)[:3]
+        context['albums'] = Album.objects.all()
+        # context['albums'] = Album.objects.filter(musical_band_id=self.object.musical_band_id)[:3]
         context['songs'] = Song.objects.filter(album_id=self.object.id)[:3]
-        context['genres']=Genre.objects.filter(song__album_id=self.object.id).distinct()
+        context['genres'] = Genre.objects.filter(song__album_id=self.object.id).distinct()
         context['members'] = BandMember.objects.filter(song__album_id=self.object.id).distinct()
         return context
+
 
 class BandDetailView(DetailView):
     template_name = 'band_detail.html'
@@ -80,7 +80,6 @@ class BandDetailView(DetailView):
 
 
 class SearchResultView(ListView):
-    # template_name = 'search_result_by_musical_band.html'
     model = MusicalBand
 
     def get(self, request, *args, **kwargs):
@@ -100,6 +99,13 @@ class SearchResultView(ListView):
             })
 
 
+class AllBandMemberView(ListView):
+    model = BandMember
 
+    def get(self, request, *args, **kwargs):
+        band_slug = request.GET.get('band_slug')
+        all_bandmember = BandMember.objects.filter(status__band__slug=band_slug)
 
-
+        return render(request, 'all_bandmember.html', context={
+            'all_member': all_bandmember
+        })

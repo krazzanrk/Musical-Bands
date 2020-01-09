@@ -17,8 +17,11 @@
                         <div class="card-body">
                             <img class="card-img-top"
                                  src="{{ album.image.url }}" height="300px">
-                            <h1 class="card-title mt-4">{{ album_detail.name }}</h1>
-
+                            <h1 class="card-title mt-4">{{ album.name }}</h1>
+{#{{ album.musical_band }}#}
+{#                        {% for i in album %}#}
+{#                            {{ i.name }}#}
+{#                        {% endfor %}#}
                             <p class="card-text text-justify">{{ album.description | safe }}</p>
                             <h5>Artists</h5>
                             <ul>
@@ -77,6 +80,7 @@
                             <div class="card-body">
                                 <ul class="list-group list-group-flush">
                                     {% for alu in albums %}
+                                        {% if alu.musical_band_id == album.musical_band_id %}
                                         <li class="list-group-item">
                                             <div class="row">
                                                 <div class="col-8">
@@ -91,6 +95,7 @@
                                                 </div>
                                             </div>
                                         </li>
+                                        {% endif %}
                                     {% endfor %}
 
                                 </ul>

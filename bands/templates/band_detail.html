@@ -69,80 +69,92 @@
 
             <section id="team" class="pb-5">
                 <div class="container">
-                    <h5 class="section-title h1">Band Members</h5>
+                    <h5 class="section-title h1">Active Band members</h5>
                     <div class="row">
                         <!-- Team member -->
                         {% for member in bandmembers %}
+                            {% if member.status.status == True %}
 
-                            <div class="col-xs-12 col-sm-6 col-md-4">
-                                <div class="image-flip" ontouchstart="this.classList.toggle('hover');">
-                                    <div class="mainflip">
-                                        <div class="frontside">
-                                            <div class="card">
-                                                <div class="card-body text-center">
-                                                    <p><img class=" img-fluid"
-                                                            src="{{ member.profile_pic.url }}"
-                                                            alt="card image"></p>
-                                                    <h4 class="card-title">{{ member.first_name }} {{ member.middle_name }} {{ member.last_name }}</h4>
-                                                    <p class="card-text">Status: {% if member.status.status == True %}
-                                                        <span style="color: #1e7e34">ACTIVE</span>{% else %}
-                                                        <span style="color: red">INACTIVE</span>{% endif %}</p>
-                                                    <a href="#" class="btn btn-primary btn-sm"><i
-                                                            class="fa fa-plus"></i></a>
+                                <div class="col-xs-12 col-sm-6 col-md-4">
+                                    <div class="image-flip" ontouchstart="this.classList.toggle('hover');">
+                                        <div class="mainflip">
+                                            <div class="frontside">
+                                                <div class="card">
+                                                    <div class="card-body text-center">
+                                                        <p><img class=" img-fluid"
+                                                                src="{{ member.profile_pic.url }}"
+                                                                alt="card image"></p>
+                                                        <h4 class="card-title">{{ member.first_name }} {{ member.middle_name }} {{ member.last_name }}</h4>
+                                                        <small class="text-muted">Role:
+                                                            {% for role in member.role.all %}{{ role.title }}
+                                                                ,{% endfor %}</small><br>
+                                                        <small class="text-muted">Band
+                                                            Joined: {{ member.status.band_date_joined }}</small>
+
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="backside">
-                                            <div class="card">
-                                                <div class="card-body text-center mt-4">
-                                                    <h4 class="card-title">{{ member.first_name }} {{ member.middle_name }} {{ member.last_name }}</h4>
+                                            <div class="backside">
+                                                <div class="card">
+                                                    <div class="card-body text-center mt-4">
+                                                        <h4 class="card-title">{{ member.first_name }} {{ member.middle_name }} {{ member.last_name }}</h4>
 
-                                                    <p class="card-text">Role:
-                                                        {% for m_role in member.role.all %}
-                                                            {{ m_role }},
-                                                        {% endfor %}
-                                                    </p>
-                                                    <ul class="list-inline">
-                                                        <li class="list-inline-item">
-                                                            <a class="social-icon text-xs-center" target="_blank"
-                                                               href="#">
-                                                                <i class="fa fa-facebook"></i>
-                                                            </a>
-                                                        </li>
-                                                        <li class="list-inline-item">
-                                                            <a class="social-icon text-xs-center" target="_blank"
-                                                               href="#">
-                                                                <i class="fa fa-twitter"></i>
-                                                            </a>
-                                                        </li>
-                                                        <li class="list-inline-item">
-                                                            <a class="social-icon text-xs-center" target="_blank"
-                                                               href="#">
-                                                                <i class="fa fa-skype"></i>
-                                                            </a>
-                                                        </li>
-                                                        <li class="list-inline-item">
-                                                            <a class="social-icon text-xs-center" target="_blank"
-                                                               href="#">
-                                                                <i class="fa fa-google"></i>
-                                                            </a>
-                                                        </li>
-                                                    </ul>
+                                                        {% if member.dob != Null %}
+                                                            <small class="text-muted">Date of birth:{{ member.dob }}
+                                                            </small><br>{% endif %}
+                                                        <small class="text-muted">{{ member.description }}
+                                                        </small>
+                                                        <ul class="list-inline">
+                                                            <li class="list-inline-item">
+                                                                <a class="social-icon text-xs-center" target="_blank"
+                                                                   href="#">
+                                                                    <i class="fa fa-facebook"></i>
+                                                                </a>
+                                                            </li>
+                                                            <li class="list-inline-item">
+                                                                <a class="social-icon text-xs-center" target="_blank"
+                                                                   href="#">
+                                                                    <i class="fa fa-twitter"></i>
+                                                                </a>
+                                                            </li>
+                                                            <li class="list-inline-item">
+                                                                <a class="social-icon text-xs-center" target="_blank"
+                                                                   href="#">
+                                                                    <i class="fa fa-skype"></i>
+                                                                </a>
+                                                            </li>
+                                                            <li class="list-inline-item">
+                                                                <a class="social-icon text-xs-center" target="_blank"
+                                                                   href="#">
+                                                                    <i class="fa fa-google"></i>
+                                                                </a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            {% endif %}
                         {% endfor %}
+
                         <!-- ./Team member -->
                         <!-- Team member -->
 
                         <!-- ./Team member -->
 
+
                     </div>
                 </div>
             </section>
+            <div class="text-center">
+                <form method="get" action="{% url 'bands:active_status' %}">
+                    <input value="{{ musicalband.slug }}" type="hidden" name="band_slug">
+                    <button type="submit" name="">View All Members</button>
+
+                </form>
+            </div>
 
 
         </div>
