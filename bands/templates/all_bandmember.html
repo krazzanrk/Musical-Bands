@@ -11,7 +11,7 @@
 
 
             {% for bm in all_member %}
-                {% if bm.status.status == True %}
+                {% if bm.status == True %}
                     <h3 class="mt-4 bg-success">Active Member</h3>
                     <div class="row">
                         <div class="col-xs-11 col-sm-5 col-md-3 mb-4">
@@ -26,7 +26,7 @@
                                         </small><br>{% endif %}
                                     <small class="text-muted">Role:
                                         {% for role in bm.role.all %}{{ role.title }},{% endfor %}</small><br>
-                                    <small class="text-muted">Band Joined: {{ bm.status.band_date_joined }}</small>
+                                    <small class="text-muted">Band Joined: {{ bm.joined_date }}</small>
 
                                 </div>
                             </div>
@@ -49,7 +49,7 @@
                                         </small><br>{% endif %}
                                     <small class="text-muted">Role:
                                         {% for role in bm.role.all %}{{ role.title }},{% endfor %}</small><br>
-                                    <small class="text-muted">Band Joined: {{ bm.status.band_date_joined }}</small>
+                                    <small class="text-muted">Band Joined: {{ bm.joined_date }}</small>
 
                                 </div>
                             </div>

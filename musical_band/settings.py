@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'bands.apps.BandsConfig',
+    'customadmin.apps.CustomAdminConfig',
     'django.contrib.sites',
     # all auth
     'allauth',

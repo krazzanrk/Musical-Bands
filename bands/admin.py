@@ -6,7 +6,6 @@ from .models import *
 admin.site.register(MusicalBand)
 admin.site.register(Role)
 admin.site.register(BandMember)
-admin.site.register(MemberStatus)
 admin.site.register(Genre)
 
 class SongTabularInline(admin.TabularInline):

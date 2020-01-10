@@ -74,7 +74,7 @@ class BandDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['bandmembers'] = BandMember.objects.filter(status__band_id=self.object.id)
+        context['bandmembers'] = BandMember.objects.filter(musical_band_id=self.object.id)
         context['latest_released'] = Album.objects.filter(musical_band=self.object.id).order_by('-released')[:5]
         return context
 
@@ -104,7 +104,7 @@ class AllBandMemberView(ListView):
 
     def get(self, request, *args, **kwargs):
         band_slug = request.GET.get('band_slug')
-        all_bandmember = BandMember.objects.filter(status__band__slug=band_slug)
+        all_bandmember = BandMember.objects.filter(musical_band__slug=band_slug)
 
         return render(request, 'all_bandmember.html', context={
             'all_member': all_bandmember

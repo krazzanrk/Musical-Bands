@@ -73,7 +73,7 @@
                     <div class="row">
                         <!-- Team member -->
                         {% for member in bandmembers %}
-                            {% if member.status.status == True %}
+                            {% if member.status == True %}
 
                                 <div class="col-xs-12 col-sm-6 col-md-4">
                                     <div class="image-flip" ontouchstart="this.classList.toggle('hover');">
@@ -89,7 +89,7 @@
                                                             {% for role in member.role.all %}{{ role.title }}
                                                                 ,{% endfor %}</small><br>
                                                         <small class="text-muted">Band
-                                                            Joined: {{ member.status.band_date_joined }}</small>
+                                                            Joined: {{ member.joined_date }}</small>
 
                                                     </div>
                                                 </div>
@@ -140,9 +140,7 @@
                         {% endfor %}
 
                         <!-- ./Team member -->
-                        <!-- Team member -->
 
-                        <!-- ./Team member -->
 
 
                     </div>
