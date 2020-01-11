@@ -58,6 +58,16 @@
 #             genre.append(i)
 #         context['genres'] = set(genre)
 #         return context
+
+# another way
+# def get_context_data(self, **kwargs):
+#     context = super().get_context_data(**kwargs)
+#     # context['albums'] = Album.objects.all()
+#     # context['albums'] = Album.objects.filter(musical_band_id=self.object.musical_band_id)[:3]
+#     # context['songs'] = Song.objects.filter(album_id=self.object.id)[:3]
+#     context['genres'] = Genre.objects.filter(song__album_id=self.object.id).distinct()
+#     context['members'] = BandMember.objects.filter(song__album_id=self.object.id).distinct()
+#     return context
 #
 #
 # class BandDetailView(DetailView):
@@ -75,6 +85,17 @@
 #
 #
 #         return context
+
+
+#another way to write context
+
+
+# def get_context_data(self, **kwargs):
+#     context = super().get_context_data(**kwargs)
+# context['bandmembers'] = BandMember.objects.filter(musical_band_id=self.object.id)
+# context['latest_released'] = Album.objects.filter(musical_band=self.object.id).order_by('-released')[:5]
+# return context
+
 #
 #
 #

@@ -18,24 +18,24 @@
                             <img class="card-img-top"
                                  src="{{ album.image.url }}" height="300px">
                             <h1 class="card-title mt-4">{{ album.name }}</h1>
-{#{{ album.musical_band }}#}
-{#                        {% for i in album %}#}
-{#                            {{ i.name }}#}
-{#                        {% endfor %}#}
+                            {{ album.song.title }}
                             <p class="card-text text-justify">{{ album.description | safe }}</p>
                             <h5>Artists</h5>
                             <ul>
+
                                 {% for member in members %}
-                                    <li>{{ member.first_name }} {{ member.middle_name }} {{ member.last_name }}</li>
-
-
+                                    <ul>
+                                        <li>{{ member.first_name }} {{ member.middle_name }} {{ member.last_name }}</li>
+                                    </ul>
                                 {% endfor %}
+
                             </ul>
                             <h5>Genres :
-                                <small>{% for genre in genres %}
-                                    {{ genre.title }},
-                                {% endfor %}
+                                <small>
 
+                                    {% for genre in genres %}
+                                        {{ genre.title }}
+                                    {% endfor %}
 
 
                                 </small></h5>
@@ -51,7 +51,7 @@
                             </div>
                             <div class="card-body">
                                 <ul class="list-group list-group-flush">
-                                    {% for song in songs %}
+                                    {% for song in album.song_set.all %}
                                         <li class="list-group-item">
                                             <div class="row">
                                                 <div class="col-12">
@@ -79,23 +79,23 @@
                             </div>
                             <div class="card-body">
                                 <ul class="list-group list-group-flush">
-                                    {% for alu in albums %}
-                                        {% if alu.musical_band_id == album.musical_band_id %}
-                                        <li class="list-group-item">
-                                            <div class="row">
-                                                <div class="col-8">
-                                                    <div class="row"><h5>{{ alu.name }}</h5></div>
-                                                    <div class="row"><h6><small><b>Released
-                                                        : </b></small><small>{{ alu.released }}</small></h6>
+                                    {% for alu in album.musical_band.album_set.all %}
+
+                                            <li class="list-group-item">
+                                                <div class="row">
+                                                    <div class="col-8">
+                                                        <div class="row"><h5>{{ alu.name }}</h5></div>
+                                                        <div class="row"><h6><small><b>Released
+                                                            : </b></small><small>{{ alu.released }}</small></h6>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-3">
+                                                        <img class="card-img-top"
+                                                             src="{{ alu.image.url }}">
                                                     </div>
                                                 </div>
-                                                <div class="col-3">
-                                                    <img class="card-img-top"
-                                                         src="{{ alu.image.url }}">
-                                                </div>
-                                            </div>
-                                        </li>
-                                        {% endif %}
+                                            </li>
+
                                     {% endfor %}
 
                                 </ul>

@@ -10,55 +10,36 @@
             </div>
 
 
-            {% for bm in all_member %}
-                {% if bm.status == True %}
-                    <h3 class="mt-4 bg-success">Active Member</h3>
-                    <div class="row">
-                        <div class="col-xs-11 col-sm-5 col-md-3 mb-4">
-                            <div class="card">
-                                <img class="card-img-top"
-                                     src="{{ bm.profile_pic.url }}" height="180px">
-                                <div class="card-body">
-                                    <h5 class="card-title">
-                                        {{ bm.first_name }} {{ bm.middle_name }}{{ bm.last_name }}</h5>
-                                    {% if bm.dob != Null %}
-                                        <small class="text-muted">Date of birth:{{ bm.dob }}
-                                        </small><br>{% endif %}
-                                    <small class="text-muted">Role:
-                                        {% for role in bm.role.all %}{{ role.title }},{% endfor %}</small><br>
-                                    <small class="text-muted">Band Joined: {{ bm.joined_date }}</small>
+            <div class="row">
+                {% for bm in all_member %}
+                    <div class="col-xs-11 col-sm-5 col-md-3 mb-4">
 
-                                </div>
+                        <div class="card">
+                            <img class="card-img-top"
+                                 src="{{ bm.profile_pic.url }}" height="180px">
+                            <div class="card-body">
+                                <h5 class="card-title">
+                                    {{ bm.first_name }} {{ bm.middle_name }}{{ bm.last_name }}</h5>
+                                {% if bm.dob != Null %}
+                                    <small class="text-muted">Date of birth:{{ bm.dob }}
+                                    {% else %}
+                                        <small class="text-muted"> Date of birth:Not mentioned</small>
+                                    </small><br>{% endif %}
+                                <small class="text-muted">Role:
+                                    {% for role in bm.role.all %}{{ role.title }},{% endfor %}</small><br>
+                                <small class="text-muted">Band Joined: {{ bm.joined_date }}</small><br>
+                                <small class="text-muted">Status:
+                                    {% if bm.status == True %}<p style="color: green">ACTIVE</p>{% else %}<p style="color: red">INACTIVE</p>{% endif %}
+                                </small><br>
+
                             </div>
-
                         </div>
 
-                    </div>
-                {% else %}
-                    <h3 class="mt-4 bg-danger">Inactive Member</h3>
-                    <div class="row">
-                     <div class="col-xs-11 col-sm-5 col-md-3 mb-4">
-                            <div class="card">
-                                <img class="card-img-top"
-                                     src="{{ bm.profile_pic.url }}" height="180px">
-                                <div class="card-body">
-                                    <h5 class="card-title">
-                                        {{ bm.first_name }} {{ bm.middle_name }}{{ bm.last_name }}</h5>
-                                    {% if bm.dob != Null %}
-                                        <small class="text-muted">Date of birth:{{ bm.dob }}
-                                        </small><br>{% endif %}
-                                    <small class="text-muted">Role:
-                                        {% for role in bm.role.all %}{{ role.title }},{% endfor %}</small><br>
-                                    <small class="text-muted">Band Joined: {{ bm.joined_date }}</small>
-
-                                </div>
-                            </div>
-
-                        </div>
 
                     </div>
-                {% endif %}
-            {% endfor %}
+                {% endfor %}
+
+            </div>
 
 
         </div>

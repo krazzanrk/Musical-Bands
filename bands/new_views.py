@@ -32,26 +32,9 @@ class BandListView(ListView):
     paginate_by = 2
 
 
-# class AlbumDetailView(DetailView):
-#     template_name = 'album_detail.html'
-#     model = Album
-#
-#     def get_context_data(self, **kwargs):
-#         context = super().get_context_data(**kwargs)
-#         context['albums'] = Album.objects.filter(musical_band_id=self.object.musical_band_id)[:3]
-#         context['songs'] = Song.objects.filter(album_id=self.object.id)[:3]
-#         genre = []
-#         alb = Genre.objects.filter(song__album_id=self.object.id)
-#         for i in alb:
-#             genre.append(i)
-#         context['genres'] = set(genre)
-#
-#         member_name = []
-#         alb = BandMember.objects.filter(song__album_id=self.object.id)
-#         for i in alb:
-#             member_name.append(i)
-#         context['members'] = set(member_name)
-#         return context
+class BandDetailView(DetailView):
+    template_name = 'band_detail.html'
+    model = MusicalBand
 
 
 class AlbumDetailView(DetailView):
@@ -60,22 +43,8 @@ class AlbumDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['albums'] = Album.objects.all()
-        # context['albums'] = Album.objects.filter(musical_band_id=self.object.musical_band_id)[:3]
-        context['songs'] = Song.objects.filter(album_id=self.object.id)[:3]
         context['genres'] = Genre.objects.filter(song__album_id=self.object.id).distinct()
         context['members'] = BandMember.objects.filter(song__album_id=self.object.id).distinct()
-        return context
-
-
-class BandDetailView(DetailView):
-    template_name = 'band_detail.html'
-    model = MusicalBand
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['bandmembers'] = BandMember.objects.filter(musical_band_id=self.object.id)
-        context['latest_released'] = Album.objects.filter(musical_band=self.object.id).order_by('-released')[:5]
         return context
 
 
@@ -109,3 +78,4 @@ class AllBandMemberView(ListView):
         return render(request, 'all_bandmember.html', context={
             'all_member': all_bandmember
         })
+
