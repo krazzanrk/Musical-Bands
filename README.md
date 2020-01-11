@@ -1,4 +1,4 @@
-#django-allauth
+# django-allauth
 
 ### Installation
 
