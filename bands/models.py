@@ -87,8 +87,6 @@ class Album(models.Model):
     class Meta:
         verbose_name_plural = 'Album names'
 
-    # def get_absolute_url(self):
-    #     return reverse('bands:bands_detail', kwargs={'slug': self.slug})
 
     def save(self, *args, **kwargs):
         value = self.name

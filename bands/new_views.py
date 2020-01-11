@@ -13,8 +13,6 @@ class IndexView(TemplateView):
         context['nepali_bands'] = MusicalBand.objects.order_by('established_date')[:3]
         context['latest_albums'] = Album.objects.order_by('-released')[:3]
         context['trending_songs'] = Song.objects.order_by('title')[:3]
-        # context['musical_band'] = MusicalBand.objects.all()
-
         return context
 
 
@@ -28,13 +26,18 @@ class AlbumListView(ListView):
 class BandListView(ListView):
     template_name = 'band_list.html'
     model = MusicalBand
+    paginate_by = 1
     context_object_name = 'musical_bands'
-    paginate_by = 2
 
 
 class BandDetailView(DetailView):
     template_name = 'band_detail.html'
     model = MusicalBand
+
+
+class AllBandMemberView(DetailView):
+    model = MusicalBand
+    template_name = 'all_bandmember.html'
 
 
 class AlbumDetailView(DetailView):
@@ -66,16 +69,3 @@ class SearchResultView(ListView):
             return render(request, 'search_result_by_album.html', context={
                 'search_result': search_result
             })
-
-
-class AllBandMemberView(ListView):
-    model = BandMember
-
-    def get(self, request, *args, **kwargs):
-        band_slug = request.GET.get('band_slug')
-        all_bandmember = BandMember.objects.filter(musical_band__slug=band_slug)
-
-        return render(request, 'all_bandmember.html', context={
-            'all_member': all_bandmember
-        })
-

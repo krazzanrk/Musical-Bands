@@ -12,7 +12,7 @@ urlpatterns = [
     path('album/<slug:slug>', AlbumDetailView.as_view(), name='albums_detail'),
     path('band/<slug:slug>', BandDetailView.as_view(), name='bands_detail'),
     path('search/result', SearchResultView.as_view(), name='search'),
-    path('bandmember/active',AllBandMemberView.as_view(),name='active_status')
+    path('<slug:slug>/allbandmember/',AllBandMemberView.as_view(),name='band_members')
 
 
 

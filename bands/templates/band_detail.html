@@ -152,12 +152,7 @@
                 </div>
             </section>
             <div class="text-center">
-                <form method="get" action="{% url 'bands:active_status' %}">
-                    {% csrf_token %}
-                    <input value="{{ musicalband.slug }}" type="hidden" name="band_slug">
-                    <button type="submit" name="">View All Members</button>
-
-                </form>
+                <button><a href="{% url 'bands:band_members' musicalband.slug %}" style="text-decoration: none">View all member</a></button>
 
             </div>
 
@@ -172,7 +167,7 @@
 
             <div class="container">
 
-                {#                <div class="row mt-lg-3 mt-md-3 mt-sm-2 bg-dark text-white">#}
+
                 <div class="row ">
                     <div>
                         <h2>Released Albums</h2>
@@ -182,7 +177,7 @@
                 </div>
 
                 <div class="row mt-2">
-                    {#                    {% for album in latest_released %}#}
+
                     {% for album in musicalband.album_set.all %}
                         <div class="col-xs-11 col-sm-5 col-md-3 mb-4">
                             <div class="card">

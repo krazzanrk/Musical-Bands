@@ -11,7 +11,9 @@
 
 
             <div class="row">
-                {% for bm in all_member %}
+                {% for bm in musicalband.bandmember_set.all %}
+
+
                     <div class="col-xs-11 col-sm-5 col-md-3 mb-4">
 
                         <div class="card">
@@ -19,17 +21,17 @@
                                  src="{{ bm.profile_pic.url }}" height="180px">
                             <div class="card-body">
                                 <h5 class="card-title">
-                                    {{ bm.first_name }} {{ bm.middle_name }}{{ bm.last_name }}</h5>
+                                    {{ bm.first_name }} {{ bm.middle_name }}{{ bm.last_name }}</h5><br>
                                 {% if bm.dob != Null %}
-                                    <small class="text-muted">Date of birth:{{ bm.dob }}
+                                    <small class="text-muted">Date of birth:{{ bm.dob }}</small><br>
                                     {% else %}
                                         <small class="text-muted"> Date of birth:Not mentioned</small>
-                                    </small><br>{% endif %}
+                                   <br>{% endif %}
                                 <small class="text-muted">Role:
                                     {% for role in bm.role.all %}{{ role.title }},{% endfor %}</small><br>
                                 <small class="text-muted">Band Joined: {{ bm.joined_date }}</small><br>
                                 <small class="text-muted">Status:
-                                    {% if bm.status == True %}<p style="color: green">ACTIVE</p>{% else %}<p style="color: red">INACTIVE</p>{% endif %}
+                                    {% if bm.status == True %}<p style="color:green">ACTIVE</p>{% else %}<p style="color: red">INACTIVE</p>{% endif %}
                                 </small><br>
 
                             </div>
@@ -37,6 +39,7 @@
 
 
                     </div>
+
                 {% endfor %}
 
             </div>
