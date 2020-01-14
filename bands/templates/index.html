@@ -65,6 +65,7 @@
                                 <p class="card-text"><small class="text-muted"> since {{ nb.established_date }}</small>
                                 </p>
                                 <p class="card-text"><small class="text-muted"> from {{ nb.location }}</small></p>
+                                <a class="card-text " href="{% url 'customadmin:musical_band_update' nb.slug %}"><small class="text-muted">click me</small></a>
                             </div>
 
                         </div>

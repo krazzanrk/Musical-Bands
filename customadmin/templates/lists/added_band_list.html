@@ -1,0 +1,35 @@
+{% extends '_admin_base.html' %}
+{% block admin-content %}
+    <div class="container">
+        <div class="row">
+            <div class="text-center">
+            <h1>Your Musical-Band Lists</h1>
+            </div>
+{% for band in musical_band %}
+            <div class="col-md-12">
+                <div class="media">
+                    <a class="pull-left" href="#">
+                        <img class="media-object dp img-circle"
+                             src="{{band.cover_image.url  }}"
+                             style="width: 150px;height:150px;">
+                    </a>
+                    <div class="media-body">
+                        <h4 class="media-heading"><b>{{ band.name }}</b></h4>
+                        <h5>since {{ band.established_date.year }}</h5>
+                        <hr style="margin:8px auto">
+                        <br>
+                        <a href="{% url 'bands:bands_detail' band.slug %}"><span class="label label-danger">View Detail</span></a>
+                        <a href="{% url 'customadmin:musical_band_update' band.slug %}"><span class="label label-default">Update</span></a>
+                        <a href="#"><span class="label label-success">Detail</span></a>
+                        <a href="#"><span class="label label-warning">Delete</span></a>
+                    </div>
+                </div>
+
+            </div>
+            {% endfor %}
+
+
+
+        </div>
+    </div>
+{% endblock %}

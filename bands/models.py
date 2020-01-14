@@ -50,7 +50,7 @@ class BandMember(models.Model):
     dob = models.DateField(blank=True, null=True)
     musical_band = models.ForeignKey(MusicalBand, on_delete=models.DO_NOTHING)
     status = models.BooleanField()
-    joined_date=models.DateField()
+    joined_date = models.DateField()
     profile_pic = models.ImageField()
     description = models.TextField()
     role = models.ManyToManyField(Role)
@@ -86,7 +86,6 @@ class Album(models.Model):
 
     class Meta:
         verbose_name_plural = 'Album names'
-
 
     def save(self, *args, **kwargs):
         value = self.name

@@ -70,7 +70,7 @@
                             <a class="nav-link text-white" href="{% url 'account_logout' %}">LOGOUT<span class="sr-only">(current)</span></a>
                         </li>
                              <li class="nav-item active">
-                            <a class="nav-link text-white">{{request.user}}<span class="sr-only">(current)</span></a>
+                            <a class="nav-link text-white" href="{% url 'customadmin:custom_admin_index' %}">My Dashoard</a>
                         </li>
                             {% else %}
                         <li class="nav-item active">

@@ -1,0 +1,125 @@
+{% extends '_admin_base.html' %}
+{% block admin-content %}
+    <style>
+
+    </style>
+    <main role="main">
+        <div><h1 style="text-align: center;padding-top: 15px;margin-bottom: 0"><b>Add Album</b></h1></div>
+        <section class="panel important">
+
+
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div>
+                    <table>
+                        <tr>
+                            <th>
+                                Album Name
+
+                            </th>
+                            <td>
+                                <div class="form-group">
+
+                                    {{ form.name }}
+                                    {% if form.errors %}
+                                        <p>{{ form.name.errors }}</p>
+                                    {% endif %}
+
+                                </div>
+
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <th>
+                                Released date
+
+                            </th>
+                            <td>
+                                <div class="form-group">
+
+                                    <input name="released" type="date">
+                                    {% if form.errors %}
+                                        <p>{{ form.released.errors }}</p>
+                                    {% endif %}
+
+
+                                </div>
+
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <th>
+                                Musical Band
+
+                            </th>
+                            <td>
+                                <div class="form-group">
+
+                                    {{ form.musical_band }}
+                                    {% if form.errors %}
+                                        <p>{{ form.musical_band.errors }}</p>
+                                    {% endif %}
+                                </div>
+
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <th>
+                                Description
+
+                            </th>
+                            <td>
+                                <div class="form-group">
+                                    {{ form.description }}
+                                    {% if form.errors %}
+                                        <p>{{ form.description.errors }}</p>
+                                    {% endif %}
+                                </div>
+
+
+                            </td>
+                        </tr>
+
+
+                        <tr>
+                            <th>
+                                Album Cover Image
+
+                            </th>
+                            <td>
+
+                                <div class="form-group">
+
+
+                                    {{ form.image }}
+                                    {% if form.errors %}
+                                        <p>{{ form.image.errors }}</p>
+                                    {% endif %}
+                                </div>
+
+
+                            </td>
+                        </tr>
+
+
+                        <input type="hidden" name="modified_by" value="{{ request.user.id }}">
+
+                        <input type="hidden" name="modified_date" value='{% now "SHORT_DATE_FORMAT" %}'>
+
+
+                    </table>
+                </div>
+                <div style="text-align: center">
+                    <button type="submit">submit</button>
+                </div>
+            </form>
+
+
+        </section>
+    </main>
+
+
+{% endblock %}

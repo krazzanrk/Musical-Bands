@@ -52,10 +52,10 @@ class AlbumDetailView(DetailView):
 
 
 class SearchResultView(ListView):
-    model = MusicalBand
 
     def get(self, request, *args, **kwargs):
         title = request.GET.get('title')
+
         band = request.GET.get('band')
 
         if request.GET.get('band'):
@@ -65,7 +65,8 @@ class SearchResultView(ListView):
             })
 
         elif request.GET.get('title'):
-            search_result = Album.objects.filter(musical_band__album__name__icontains=title)
+            search_result = Album.objects.filter(name__icontains=title)
             return render(request, 'search_result_by_album.html', context={
                 'search_result': search_result
             })
+

@@ -1,103 +1,44 @@
 {% load static %}
 <!DOCTYPE html>
 
-<html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <title>Band hawa of Nepal</title>
-
+    <title>Admin Dashboard</title>
 
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/musicalband_list.css' %}">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
 
-
-    <script src="{% static 'js/base_style.js' %}"></script>
-
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <!-- Fengyuan Chen's Datepicker -->
 
 </head>
 
 
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-<!------ Include the above in your HEAD tag ---------->
-
-
-<!--===================
-Header
-=======================-->
-<header class="header">
-    <nav class="navbar navbar-toggleable-md navbar-light pt-0 pb-0 ">
-        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
-                data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false"
-                aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <a class="navbar-brand p-0 mr-5" href="#"><img src="http://via.placeholder.com/61x14"></a>
-        <div class="float-left"><a href="#" class="button-left"><span class="fa fa-fw fa-bars "></span></a></div>
-        <div class="collapse navbar-collapse flex-row-reverse" id="navbarNavDropdown">
-            <ul class="navbar-nav">
-                <li class="nav-item dropdown  user-menu">
-                    <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink"
-                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <img src="http://via.placeholder.com/160x160" class="user-image" alt="User Image">
-                        <span class="hidden-xs">bootstrap develop</span>
-                    </a>
-
-                </li>
-            </ul>
-        </div>
-    </nav>
+<header role="banner">
+    <h1>Admin Panel</h1>
+    <ul class="utilities">
+        <li><a href="{% url 'bands:home' %}">Home</a></li>
+        <li class="users"><a href="#">Welcome {{ request.user }}</a></li>
+        <li class="logout warn " style="color: red"><a href="{% url 'account_logout' %}">Log Out</a></li>
+    </ul>
 </header>
-<div class="row">
-    <div class="col-2">
 
-        <div class="main">
-            <div class="sidebar left ">
-                <div class="user-panel">
-                    <div class="pull-left image">
-                        <img src="http://via.placeholder.com/160x160" class="rounded-circle" alt="User Image">
-                    </div>
-                    <div class="pull-left info">
-                        <p>bootstrap develop</p>
-                        <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
-                    </div>
-                </div>
-                <ul class="list-sidebar bg-defoult">
-                    <li><a href="#" data-toggle="collapse" data-target="#dashboard" class="collapsed active"> <i
-                            class="fa fa-th-large"></i> <span class="nav-label"> Dashboards </span> <span
-                            class="fa fa-chevron-left pull-right"></span> </a>
-                        <ul class="sub-menu collapse" id="dashboard">
-                            <li class="active"><a href="#">CSS3 Animation</a></li>
-                            <li><a href="#">Add Musical Band</a></li>
-                            <li><a href="#">Add Bandmembers</a></li>
-                            <li><a href="#">Add memberstatus</a></li>
-                            <li><a href="#">Add Album</a></li>
-                            <li><a href="#">Add songs</a></li>
+<nav role="navigation">
+    <ul class="main">
+        <li class="dashboard"><a href="#">Dashboard</a></li>
+        <li class="write"><a href="{% url 'customadmin:musical_band_create' %}">Add Musical Band</a></li>
+        <li class="write"><a href="{% url 'customadmin:album_create' %}">Add Album</a></li>
+        <li class="write"><a href="{% url 'customadmin:add_song' %}">Add Songs</a></li>
+        <li class="View"><a href="{% url 'customadmin:musical_band_added_list' %}"> Band Created</a></li>
+        <li class="View"><a href="{% url 'customadmin:album_added_list' %}"> Album Added</a></li>
+        <li class="glyphicon-eye-close"><a href="#"> Song Added</a></li>
+    </ul>
+</nav>
+{% block admin-content %}
+{% endblock %}
 
-                        </ul>
-                    </li>
-                    <li><a href="#"><i class="fa fa-diamond"></i> <span class="nav-label">Home</span></a></li>
-                    <li><a href="#"><i class="fa fa-diamond"></i> <span class="nav-label">Musical Band Added</span></a>
-                    </li>
-
-                    <li><a href="#"><i class="fa fa-laptop"></i> <span class="nav-label">Band member Added</span></a>
-                    </li>
-                    <li><a href="#"><i class="fa fa-laptop"></i> <span class="nav-label">Album Added</span></a></li>
-                    <li><a href="#"><i class="fa fa-laptop"></i> <span class="nav-label">Logout</span></a></li>
-                </ul>
-            </div>
-        </div>
-        <div>
-        </div>
-
-    </div>
-    <div class="offset-2 col-9">
-        <h1>HELLO WELCOME TO THE MUSICAL BAND</h1>
-    </div>
-
-</div>
+<footer role="contentinfo">Easy Admin Style by Melissa Cabral</footer>
 </html>
