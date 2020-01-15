@@ -7,6 +7,7 @@
     <title>Admin Dashboard</title>
 
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bandmember_list.css' %}">
     <link rel="stylesheet" href="{% static 'css/musicalband_list.css' %}">
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
             integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
@@ -31,10 +32,12 @@
         <li class="dashboard"><a href="#">Dashboard</a></li>
         <li class="write"><a href="{% url 'customadmin:musical_band_create' %}">Add Musical Band</a></li>
         <li class="write"><a href="{% url 'customadmin:album_create' %}">Add Album</a></li>
+        <li class="write"><a href="{% url 'customadmin:band_member_create' %}">Add Bandmember</a></li>
         <li class="write"><a href="{% url 'customadmin:add_song' %}">Add Songs</a></li>
         <li class="View"><a href="{% url 'customadmin:musical_band_added_list' %}"> Band Created</a></li>
+        <li class="View"><a href="{% url 'customadmin:added_bandmember_list' %}"> Bandmember Created</a></li>
         <li class="View"><a href="{% url 'customadmin:album_added_list' %}"> Album Added</a></li>
-        <li class="glyphicon-eye-close"><a href="#"> Song Added</a></li>
+        <li class="glyphicon-eye-close"><a href="{% url 'customadmin:added_song_list' %}"> Song Added</a></li>
     </ul>
 </nav>
 {% block admin-content %}

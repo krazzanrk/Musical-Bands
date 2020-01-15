@@ -1,0 +1,49 @@
+{% extends '_admin_base.html' %}
+{% block admin-content %}
+    <div class="container">
+        <div class="row">
+            <div class="text-center">
+                <h1 style="text-align: center;padding-top: 25px">Added members</h1>
+            </div>
+            {% if members.count > 0 %}
+                <p>you have added {{ members.count }} bandmembers</p>
+                {% for member in members %}
+                    <div class="col-md-12">
+                        <div class="media">
+                            <a class="pull-left" href="#">
+                                <img class="media-object dp img-circle"
+                                     src="{{ member.profile_pic.url }}"
+                                     style="width: 150px;height:150px;">
+                            </a>
+                            <div class="media-body">
+                                <h4 class="media-heading">
+                                    <b>{{ member.first_name }} {{ member.middle_name }} {{ member.last_name }}</b></h4>
+                                <h5> <b>Role : </b>{% for r in member.role.all %} {{ r.title }}, {% endfor %} &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <b>Band : </b>{{ member.musical_band.name }} &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <b>Joined band : </b> {{ member.joined_date }}</h5>
+                                <hr style="margin:8px auto">
+                                <br>
+
+                                <a href="{% url 'customadmin:bandmember_update' member.pk %}"><span
+                                        class="label label-default">Update</span></a>
+                                <a href="#"><span class="label label-success">Detail</span></a>
+                                <a href="#"><span class="label label-warning">Delete</span></a>
+                            </div>
+                        </div>
+
+                    </div>
+                {% endfor %}
+            {% else %}
+                <div class="col-md-12">
+
+                <div class="media">
+                    <h3 style="text-align: center;color: red"> Sorry haven't add any members</h3><br>
+                    <a href="{% url 'customadmin:band_member_create' %}"><h3 style="text-align: center"> Add new band
+                        members</h3></a>
+                </div>
+            {% endif %}
+
+
+
+
+            </div>
+        </div>
+{% endblock %}

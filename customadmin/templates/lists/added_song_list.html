@@ -1,0 +1,54 @@
+{% extends '_admin_base.html' %}
+{% load static %}
+{% block admin-content %}
+    <div class="container">
+        <div class="" style="padding-top: 25px;text-align: center">
+            <h1>Added Songs List</h1>
+        </div>
+        <div class="row">
+
+            {% if songs.count > 0 %}
+                <p>you have added {{ songs.count }} songs</p>
+                {% for song in songs %}
+                    <div class="col-md-12">
+                        <div class="media">
+                            <a class="pull-left" href="#">
+                                <img class="media-object dp img-circle"
+                                     src="{% static  'image/musiccd.png' %}"
+                                     style="width: 100px;height:80px;">
+                            </a>
+                            <div class="media-body">
+                                <h4 class="media-heading">
+                                    <b>
+                                        {{ song.title }}
+                                        <small>
+                                            ({{ song.album.name }})
+                                        </small>
+                                    </b>
+                                </h4>
+                                <h5><small>genre : {% for s in song.genre.all %}
+                                    {{ s.title }},{% endfor %} &nbsp;&nbsp; by : ({{ song.album.musical_band.name }})</small><a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Delete</a></h5>
+
+                            </div>
+                        </div>
+
+                    </div>
+                {% endfor %}
+            {% else %}
+                <div class="col-md-12">
+
+                    <div class="media">
+                        <h3 style="text-align: center;color: red"> Sorry no any album</h3><br>
+                        <a href="{% url 'customadmin:album_create' %}"><h3 style="text-align: center"> Add new
+                            Album</h3></a>
+                    </div>
+
+
+                </div>
+
+            {% endif %}
+
+
+        </div>
+    </div>
+{% endblock %}

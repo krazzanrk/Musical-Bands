@@ -12,10 +12,12 @@ urlpatterns = [
     path('add/song', SongAddView.as_view(), name='add_song'),
 
     path('update/musical_band/<slug:slug>', MusicalBandUpdateView.as_view(), name='musical_band_update'),
-    path('update/bandmember/<slug:slug>', BandMemberUpdateView.as_view(), name='bandmemeber_update_view'),
+    path('update/bandmember/<int:pk>', BandMemberUpdateView.as_view(), name='bandmember_update'),
     path('update/album/<slug:slug>',AlbumUpdateView.as_view(),name='album_update_view'),
 
     path('musical_band/list', AdminMusicalBandListView.as_view(), name='musical_band_added_list'),
-    path('album/list', AdminAlbumListView.as_view(), name='album_added_list')
+    path('album/list', AdminAlbumListView.as_view(), name='album_added_list'),
+    path('songs/list',AdminSongListView.as_view(),name='added_song_list'),
+    path('bandmember/list',AdminBandmemberListView.as_view(),name='added_bandmember_list')
 
 ]

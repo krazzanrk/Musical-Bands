@@ -72,7 +72,7 @@
 
                                 <div class="form-group">
 
-                                    <input name="dob" type="date">
+                                    {{form.dob}}
                                     {% if form.errors %}
                                         <p>{{ form.dob.errors }}</p>
                                     {% endif %}
@@ -154,7 +154,7 @@
                             </th>
                             <td>
                                 <div class="form-group">
-                                    <input type="date" name="joined_date">
+                                    {{ form.joined_date}}
                                         {% if form.errors %}
                                         <p>{{ form.joined_date.errors }}</p>
                                     {% endif %}
