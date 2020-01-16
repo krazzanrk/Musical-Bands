@@ -18,6 +18,12 @@ urlpatterns = [
     path('musical_band/list', AdminMusicalBandListView.as_view(), name='musical_band_added_list'),
     path('album/list', AdminAlbumListView.as_view(), name='album_added_list'),
     path('songs/list',AdminSongListView.as_view(),name='added_song_list'),
-    path('bandmember/list',AdminBandmemberListView.as_view(),name='added_bandmember_list')
+    path('bandmember/list',AdminBandmemberListView.as_view(),name='added_bandmember_list'),
+
+
+    path('album/<slug:slug>/delete',AlbumDeleteView.as_view(),name='delete_album'),
+    path('musical_band/<slug:slug>/delete',MusicalBandDeleteView.as_view(),name='delete_musical_band'),
+    path('bandmember/<int:pk>/delete',BandMemberDeleteView.as_view(),name='delete_band_members'),
+    path('song/<int:pk>/delete',SongDeleteView.as_view(),name='delete_song')
 
 ]

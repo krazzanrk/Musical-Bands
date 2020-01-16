@@ -23,8 +23,7 @@
                             <a href="{% url 'bands:bands_detail' band.slug %}"><span class="label label-danger">View Detail</span></a>
                             <a href="{% url 'customadmin:musical_band_update' band.slug %}"><span
                                     class="label label-default">Update</span></a>
-                            <a href="#"><span class="label label-success">Detail</span></a>
-                            <a href="#"><span class="label label-warning">Delete</span></a>
+                            <a href="{% url 'customadmin:delete_musical_band' band.slug %}"><span class="label label-warning">Delete</span></a>
                         </div>
                     </div>
 

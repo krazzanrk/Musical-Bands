@@ -18,14 +18,16 @@
                             <div class="media-body">
                                 <h4 class="media-heading">
                                     <b>{{ member.first_name }} {{ member.middle_name }} {{ member.last_name }}</b></h4>
-                                <h5> <b>Role : </b>{% for r in member.role.all %} {{ r.title }}, {% endfor %} &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <b>Band : </b>{{ member.musical_band.name }} &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <b>Joined band : </b> {{ member.joined_date }}</h5>
+                                <h5><b>Role : </b>{% for r in member.role.all %} {{ r.title }}, {% endfor %} &nbsp;
+                                    &nbsp; &nbsp; &nbsp; &nbsp; <b>Band : </b>{{ member.musical_band.name }} &nbsp;
+                                    &nbsp; &nbsp; &nbsp; &nbsp; <b>Joined band : </b> {{ member.joined_date }}</h5>
                                 <hr style="margin:8px auto">
                                 <br>
 
                                 <a href="{% url 'customadmin:bandmember_update' member.pk %}"><span
                                         class="label label-default">Update</span></a>
-                                <a href="#"><span class="label label-success">Detail</span></a>
-                                <a href="#"><span class="label label-warning">Delete</span></a>
+                                <a href="{% url 'customadmin:delete_band_members' member.pk %}"><span
+                                        class="label label-warning">Delete</span></a>
                             </div>
                         </div>
 

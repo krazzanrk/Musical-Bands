@@ -1,0 +1,9 @@
+{% extends '_admin_base.html' %}
+{% block admin-content %}
+    <section style="margin-left: 50%;margin-top: 25%">
+        <form method="post">{% csrf_token %}
+            <p>Are you sure you want to delete "{{ object }}"?</p>
+            <button value="Confirm" >yes</button><button ><a href="{% url 'customadmin:custom_admin_index' %}">NO</a></button>
+        </form>
+    </section>
+{% endblock %}
