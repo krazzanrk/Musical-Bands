@@ -14,6 +14,7 @@ urlpatterns = [
     path('update/musical_band/<slug:slug>', MusicalBandUpdateView.as_view(), name='musical_band_update'),
     path('update/bandmember/<int:pk>', BandMemberUpdateView.as_view(), name='bandmember_update'),
     path('update/album/<slug:slug>',AlbumUpdateView.as_view(),name='album_update_view'),
+    path('update/song/<int:pk>',SongUpdateView.as_view(),name='song_update'),
 
     path('musical_band/list', AdminMusicalBandListView.as_view(), name='musical_band_added_list'),
     path('album/list', AdminAlbumListView.as_view(), name='album_added_list'),

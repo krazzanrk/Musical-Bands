@@ -28,7 +28,7 @@
                                 </h4>
                                 <h5><small>genre : {% for s in song.genre.all %}
                                     {{ s.title }},{% endfor %} &nbsp;&nbsp; by :
-                                    ({{ song.album.musical_band.name }})</small><a
+                                    ({{ song.album.musical_band.name }})</small>&nbsp;&nbsp;&nbsp;&nbsp;<a href="{% url 'customadmin:song_update' song.pk %}">Update</a><a
                                         href="{% url 'customadmin:delete_song' song.pk %}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                     Delete</a></h5>
 
@@ -42,8 +42,8 @@
 
                     <div class="media">
                         <h3 style="text-align: center;color: red"> Sorry no any album</h3><br>
-                        <a href="{% url 'customadmin:album_create' %}"><h3 style="text-align: center"> Add new
-                            Album</h3></a>
+                        <a href="{% url 'customadmin:add_song' %}"><h3 style="text-align: center"> Add new
+                            song</h3></a>
                     </div>
 
 
