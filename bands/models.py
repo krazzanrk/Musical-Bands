@@ -9,10 +9,10 @@ from django.utils.text import slugify
 class Role(models.Model):
     title = models.CharField(max_length=50)
     created_by = models.ForeignKey(User, on_delete=models.DO_NOTHING, related_name='role_createdby')
-    created_date = models.DateTimeField()
+    created_date = models.DateTimeField(auto_now_add=True)
     modified_by = models.ForeignKey(User, on_delete=models.DO_NOTHING, related_name='role_modifiedby', blank=True,
                                     null=True)
-    modified_date = models.DateTimeField(blank=True, null=True)
+    modified_date = models.DateTimeField(blank=True, auto_now=True)
 
     def __str__(self):
         return self.title
@@ -25,10 +25,10 @@ class MusicalBand(models.Model):
     description = models.TextField()
     cover_image = models.ImageField()
     created_by = models.ForeignKey(User, on_delete=models.DO_NOTHING, related_name='musicalband_createdby')
-    created_date = models.DateTimeField()
+    created_date = models.DateTimeField(auto_now_add=True)
     modified_by = models.ForeignKey(User, on_delete=models.DO_NOTHING, related_name='musicalband_modifiedby',
                                     blank=True, null=True)
-    modified_date = models.DateTimeField(blank=True, null=True)
+    modified_date = models.DateTimeField(blank=True, auto_now=True)
     slug = models.SlugField(unique=True)
 
     def __str__(self):
@@ -56,10 +56,10 @@ class BandMember(models.Model):
     role = models.ManyToManyField(Role)
 
     created_by = models.ForeignKey(User, on_delete=models.DO_NOTHING, related_name='bandmember_createdby')
-    created_date = models.DateTimeField()
+    created_date = models.DateTimeField(auto_now_add=True)
     modified_by = models.ForeignKey(User, on_delete=models.DO_NOTHING, related_name='bandmember_modifiedby', blank=True,
                                     null=True)
-    modified_date = models.DateTimeField(blank=True, null=True)
+    modified_date = models.DateTimeField(blank=True, auto_now=True)
 
     def __str__(self):
         return self.first_name
@@ -75,10 +75,10 @@ class Album(models.Model):
     description = models.TextField(blank=True, null=True)
     image = models.ImageField()
     created_by = models.ForeignKey(User, on_delete=models.DO_NOTHING, related_name='album_createdby')
-    created_date = models.DateTimeField()
+    created_date = models.DateTimeField(auto_now_add=True)
     modified_by = models.ForeignKey(User, on_delete=models.DO_NOTHING, related_name='album_modifiedby', blank=True,
                                     null=True)
-    modified_date = models.DateTimeField(blank=True, null=True)
+    modified_date = models.DateTimeField(blank=True, auto_now=True)
     slug = models.SlugField(unique=True)
 
     def __str__(self):
@@ -96,10 +96,10 @@ class Album(models.Model):
 class Genre(models.Model):
     title = models.CharField(max_length=50)
     created_by = models.ForeignKey(User, on_delete=models.DO_NOTHING, related_name='genre_createdby')
-    created_date = models.DateTimeField()
+    created_date = models.DateTimeField(auto_now_add=True)
     modified_by = models.ForeignKey(User, on_delete=models.DO_NOTHING, related_name='genre_modifiedby', blank=True,
                                     null=True)
-    modified_date = models.DateTimeField(blank=True, null=True)
+    modified_date = models.DateTimeField(blank=True, auto_now=True)
 
     def __str__(self):
         return self.title
@@ -111,10 +111,10 @@ class Song(models.Model):
     album = models.ForeignKey(Album, on_delete=models.DO_NOTHING)
     member_name = models.ManyToManyField(BandMember)
     created_by = models.ForeignKey(User, on_delete=models.DO_NOTHING, related_name='song_createdby')
-    created_date = models.DateTimeField()
+    created_date = models.DateTimeField(auto_now_add=True)
     modified_by = models.ForeignKey(User, on_delete=models.DO_NOTHING, related_name='song_modifiedby', blank=True,
                                     null=True)
-    modified_date = models.DateTimeField(blank=True, null=True)
+    modified_date = models.DateTimeField(blank=True,auto_now=True)
 
     def __str__(self):
         return self.title

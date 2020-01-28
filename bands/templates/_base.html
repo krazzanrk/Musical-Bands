@@ -7,8 +7,9 @@
     <title>Band of Nepal</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
 
 
     <link rel="stylesheet" href="{% static 'css/banner.css' %}">
@@ -26,12 +27,12 @@
 <div class="container-fluid bg-dark text-warning">
     <div class="row p-lg-3">
         <div class="col-lg-6 col-md-6 col-sm-6"><h2 class="pl-lg-5">Nepali Musical Band</h2></div>
-{#                <div class="col-lg-6 col-md-6 col-sm-6 ">#}
-{#                    <form class="form-inline my-2 my-lg-0 float-right pr-lg-3 p-1">#}
-{#                        <input class="form-control mr-sm-2" title='topic' type="search" placeholder="Search" aria-label="Search">#}
-{#                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>#}
-{#                    </form>#}
-{#                </div>#}
+        {#                <div class="col-lg-6 col-md-6 col-sm-6 ">#}
+        {#                    <form class="form-inline my-2 my-lg-0 float-right pr-lg-3 p-1">#}
+        {#                        <input class="form-control mr-sm-2" title='topic' type="search" placeholder="Search" aria-label="Search">#}
+        {#                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>#}
+        {#                    </form>#}
+        {#                </div>#}
 
     </div>
     <hr class="bg-light m-0 ">
@@ -67,18 +68,21 @@
                         {% if request.user.is_authenticated %}
 
                             <li class="nav-item active">
-                            <a class="nav-link text-white" href="{% url 'account_logout' %}">LOGOUT<span class="sr-only">(current)</span></a>
-                        </li>
-                             <li class="nav-item active">
-                            <a class="nav-link text-white" href="{% url 'customadmin:custom_admin_index' %}">My Dashoard</a>
-                        </li>
-                            {% else %}
-                        <li class="nav-item active">
-                            <a class="nav-link text-white" href="{% url 'account_login' %}">LOGIN <span class="sr-only">(current)</span></a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-white" href="{% url 'account_signup' %}">REGISTER</a>
-                        </li>
+                                <a class="nav-link text-white" href="{% url 'account_logout' %}">LOGOUT<span
+                                        class="sr-only">(current)</span></a>
+                            </li>
+                            <li class="nav-item active">
+                                <a class="nav-link text-white" href="{% url 'customadmin:custom_admin_index' %}">My
+                                    Dashoard</a>
+                            </li>
+                        {% else %}
+                            <li class="nav-item active">
+                                <a class="nav-link text-white" href="{% url 'account_login' %}">LOGIN <span
+                                        class="sr-only">(current)</span></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-white" href="{% url 'account_signup' %}">REGISTER</a>
+                            </li>
                         {% endif %}
                     </ul>
                 </div>
@@ -105,8 +109,6 @@
 <!-- Footer -->
 
 </body>
-
-
 
 
 </html>
