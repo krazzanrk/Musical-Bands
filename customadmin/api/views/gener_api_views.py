@@ -1,10 +1,10 @@
 from rest_framework import viewsets, permissions
-from customadmin.api.serializers.gener_viewset_serializer import *
+from customadmin.api.serializers.gener_serializer import *
 
 
-class UserViewSet(viewsets.ReadOnlyModelViewSet):
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
+# class UserViewSet(viewsets.ReadOnlyModelViewSet):
+#     queryset = User.objects.all()
+#     serializer_class = UserSerializer
 
 
 class GenreViewSet(viewsets.ModelViewSet):

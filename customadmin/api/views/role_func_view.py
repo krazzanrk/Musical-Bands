@@ -6,7 +6,7 @@ from rest_framework.parsers import JSONParser
 from rest_framework.response import Response
 
 from bands.models import Role
-from customadmin.api.serializers.role_function_serailizer import RoleSerializer
+from customadmin.api.serializers.role_serailizer import RoleSerializer
 
 
 @csrf_exempt
